@@ -2,6 +2,7 @@ package com.akitsulab.knowledge.repository;
 
 import com.akitsulab.knowledge.domain.User;
 import com.akitsulab.knowledge.domain.UserSelector;
+import com.akitsulab.knowledge.repository.mybatis.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +24,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public List<User> findList(UserSelector selector) {
-//        return this.sqlSession.getMapper(UserMapper.class).find(selector);
-        return null;
+        return this.sqlSession.getMapper(UserMapper.class).find(selector);
     }
 
     @Override
