@@ -66,4 +66,14 @@ public class UserRestController {
         user.setUserId(userId);
         this.service.set(user);
     }
+
+    /**
+     * ID指定による1件削除処理。
+     *
+     * @param userId リクエスト時のパスに含まれるID
+     */
+    @DeleteMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void remove(@PathVariable Long userId) {
+        this.service.remove(userId);
+    }
 }

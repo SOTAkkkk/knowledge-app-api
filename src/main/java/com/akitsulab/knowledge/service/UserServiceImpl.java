@@ -40,4 +40,12 @@ public class UserServiceImpl implements UserService {
     public void set(User user) {
         this.userRepository.update(user);
     }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public void remove(Long userId) {
+        User user = this.userRepository.findOne(userId);
+        this.userRepository.delete(user);
+    }
+
 }

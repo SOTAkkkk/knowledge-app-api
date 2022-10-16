@@ -95,7 +95,23 @@ public class UserRepositoryImplDBUnitTest {
         }
     }
 
-    static class DbTestExecutionListener extends AbstractTestExecutionListener {
+    /**
+     * REMOVE(論理削除)のSQLを検証するテスト
+     */
+    @SpringBootTest(classes = KnowledgeApplication.class)
+    @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbTestExecutionListener.class})
+    @Nested
+    public class DeleteDbTest{
+        @Autowired
+        private UserRepository target;
 
+        @Test
+        public void testDelete() {
+            User user = target.findOne(2L);
+            target.delete(user);    //論理削除
+        }
+
+    }
+    static class DbTestExecutionListener extends AbstractTestExecutionListener {
     }
 }
