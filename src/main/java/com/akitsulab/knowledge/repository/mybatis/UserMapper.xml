@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.akitsulab.knowledge.repository.mybatis.UserMapper">
+    <resultMap id="User" type="com.akitsulab.knowledge.domain.User">
+        <id property="userId" column="USER_ID"/>
+        <result property="email" column="EMAIL"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="firstName" column="FIRST_NAME"/>
+        <result property="lastName" column="LAST_NAME"/>
+        <result property="administratorFlag" column="ADMINISTRATOR_FLAG"/>
+        <result property="status" column="STATUS"/>
+        <result property="expiredAt" column="EXPIRED_AT"/>
+        <result property="updateUserId" column="UPDATE_USER_ID"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="lockVersion" column="LOCK_VERSION"/>
+        <result property="deleteFlag" column="DELETE_FLAG"/>
+    </resultMap>
+    <select id="find" resultMap="User">
+        SELECT USER_ID,
+        EMAIL,
+        PASSWORD,
+        FIRST_NAME,
+        LAST_NAME,
+        ADMINISTRATOR_FLAG,
+        STATUS,
+        EXPIRED_AT,
+        UPDATE_USER_ID,
+        UPDATED_AT,
+        LOCK_VERSION,
+        DELETE_FLAG
+        FROM USER
+        <where>
+            DELETE_FLAG = 0
+            <if test="email != null">
+                AND EMAIl = #{email}
+            </if>
+        </where>
+        ORDER BY UPDATED_AT DESC
+    </select>
+    <select id="get" resultMap="User">
+        SELECT USER_ID,
+               EMAIL,
+               PASSWORD,
+               FIRST_NAME,
+               LAST_NAME,
+               ADMINISTRATOR_FLAG,
+               STATUS,
+               EXPIRED_AT,
+               UPDATE_USER_ID,
+               UPDATED_AT,
+               LOCK_VERSION,
+               DELETE_FLAG
+        FROM USER
+        WHERE USER_ID = #{userId}
+          AND DELETE_FLAG = 0
+    </select>
+</mapper>
