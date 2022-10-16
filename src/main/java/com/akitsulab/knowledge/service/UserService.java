@@ -23,4 +23,11 @@ public interface UserService {
      * @return 指定されたIDのUserデータ
      */
     User get(Long id);
+
+    /**
+     * Userの新規登録処理。
+     *
+     * @param user 登録内容
+     */
+    void add(User user);
 }

@@ -40,7 +40,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void insert(User user) {
-
+        this.sqlSession.getMapper(UserMapper.class).add(user);
     }
 
     @Override
