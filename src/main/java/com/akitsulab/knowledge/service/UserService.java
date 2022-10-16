@@ -30,4 +30,10 @@ public interface UserService {
      * @param user 登録内容
      */
     void add(User user);
+
+    /**
+     * ID指定による1件更新処理。
+     * @param user 更新内容
+     */
+    void set(User user);
 }

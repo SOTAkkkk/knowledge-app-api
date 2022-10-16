@@ -86,6 +86,32 @@
         )
     </insert>
 
+    <update id="set" parameterType="com.akitsulab.knowledge.domain.User">
+        <include refid="timestampVariable"/>
+        UPDATE
+        USER
+        SET
+        EMAIL=#{email},
+        <if test="password != null">
+            password = #{password},
+        </if>
+        FIRST_NAME=#{firstName},
+        LAST_NAME=#{lastName},
+        ADMINISTRATOR_FLAG=#{administratorFlag},
+        <if test="expiredAt!=null">
+            EXPIRED_AT=#{expiredAt},
+        </if>
+        <if test="status!=null">
+            STATUS=#{status},
+        </if>
+        UPDATE_USER_ID=#{updateUserId},
+        UPDATED_AT = #{sysdate},
+        LOCK_VERSION=LOCK_VERSION + 1
+        WHERE
+        USER_ID=#{userId}
+        AND LOCK_VERSION=#{lockVersion}
+        AND DELETE_FLAG=0
+    </update>
 
     <!-- sysdateをbindする共通Util -->
     <sql id="timestampVariable">
