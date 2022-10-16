@@ -5,9 +5,10 @@ import com.akitsulab.knowledge.domain.UserList;
 import com.akitsulab.knowledge.domain.UserSelector;
 import com.akitsulab.knowledge.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -27,4 +28,11 @@ public class UserServiceImpl implements UserService{
     public User get(Long userId) {
         return this.userRepository.findOne(userId);
     }
+
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public void add(User user) {
+        this.userRepository.insert(user);
+    }
+
 }
