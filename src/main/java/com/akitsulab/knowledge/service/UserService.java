@@ -36,4 +36,11 @@ public interface UserService {
      * @param user 更新内容
      */
     void set(User user);
+
+    /**
+     * ID指定による1件削除処理。
+     *
+     * @param id リクエスト時のパスに含まれるID
+     */
+    void remove(Long id);
 }
