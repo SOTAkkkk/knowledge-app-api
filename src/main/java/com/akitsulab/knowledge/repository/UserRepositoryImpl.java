@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
@@ -40,6 +40,11 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void insert(User user) {
+
+    }
+
+    @Override
+    public void update(User user) {
 
     }
 
