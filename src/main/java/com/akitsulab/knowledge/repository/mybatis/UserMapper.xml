@@ -56,4 +56,39 @@
         WHERE USER_ID = #{userId}
           AND DELETE_FLAG = 0
     </select>
+    <insert id="add" parameterType="com.akitsulab.knowledge.domain.User" useGeneratedKeys="true" keyProperty="userId">
+        <include refid="timestampVariable"/>
+        INSERT INTO USER
+        (
+        EMAIL,
+        PASSWORD,
+        FIRST_NAME,
+        LAST_NAME,
+        ADMINISTRATOR_FLAG,
+        STATUS,
+        EXPIRED_AT,
+        UPDATE_USER_ID,
+        UPDATED_AT,
+        DELETE_FLAG
+        )
+        VALUES
+        (
+        #{email},
+        #{password},
+        #{firstName},
+        #{lastName},
+        #{administratorFlag},
+        #{status},
+        #{expiredAt},
+        #{updateUserId},
+        #{sysdate},
+        0
+        )
+    </insert>
+
+
+    <!-- sysdateをbindする共通Util -->
+    <sql id="timestampVariable">
+        <bind name="sysdate" value="@java.time.LocalDateTime@now()"/>
+    </sql>
 </mapper>

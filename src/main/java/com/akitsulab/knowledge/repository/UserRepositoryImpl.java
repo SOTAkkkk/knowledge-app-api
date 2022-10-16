@@ -6,6 +6,7 @@ import com.akitsulab.knowledge.repository.mybatis.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,7 +30,12 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User findOne(Long id) {
-        return null;
+        User user = this.sqlSession.getMapper(UserMapper.class).get(id);
+        if (user == null) {
+            logger.warn("User not found. id={}", id);
+            throw new ResourceNotFoundException("User not found.");
+        }
+        return user;
     }
 
     @Override
