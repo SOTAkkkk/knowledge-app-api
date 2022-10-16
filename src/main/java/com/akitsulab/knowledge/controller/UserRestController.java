@@ -54,4 +54,16 @@ public class UserRestController {
     public void add(@RequestBody User user) {
         this.service.add(user);
     }
+
+    /**
+     * ID指定による1件更新処理。
+     *
+     * @param userId リクエスト時のパスに含まれるID
+     * @param user   更新内容
+     */
+    @PatchMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void set(@PathVariable Long userId, @RequestBody User user) {
+        user.setUserId(userId);
+        this.service.set(user);
+    }
 }

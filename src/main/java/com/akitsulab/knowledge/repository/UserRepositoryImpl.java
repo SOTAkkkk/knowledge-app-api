@@ -45,7 +45,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void update(User user) {
-
+        this.sqlSession.getMapper(UserMapper.class).set(user);
     }
 
     @Override
