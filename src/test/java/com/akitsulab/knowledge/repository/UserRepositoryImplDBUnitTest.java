@@ -77,6 +77,24 @@ public class UserRepositoryImplDBUnitTest {
         }
     }
 
+    /**
+     * UPDATEのSQLを検証するテスト
+     */
+    @SpringBootTest(classes = KnowledgeApplication.class)
+    @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DbTestExecutionListener.class})
+    @Nested
+    public class UpdateDbTest {
+        @Autowired
+        private UserRepository target;
+
+        @Test
+        public void testUpdate() {
+            User user = target.findOne(1L);
+            user.setEmail("test5update@yahoo.xx.xx");   // メールアドレスと更新
+            target.update(user);
+        }
+    }
+
     static class DbTestExecutionListener extends AbstractTestExecutionListener {
 
     }
